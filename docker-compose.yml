@@ -1,0 +1,28 @@
+# Run MinIO on localhost:9000 for the S3 API
+# Run the web console on localhost:9001
+# Use credentials minioadmin / minioadmin
+# to start MinIO -> bash: docker-compose up -d
+
+# Access MinIO Web Console
+# Once the container is up, open your browser and go to:
+# http://localhost:9001
+#Log in with:
+#Username: minioadmin
+#Password: minioadmin
+
+version: '3.8'
+
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+    - "9000:9000" # S3 API port
+    - "9001:9001" # Web UI port
+    volumes:
+      - ./minio_data:/data 
+    environment:
+      MINIO_ROOT_USER: minioadmin 
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+

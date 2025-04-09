@@ -1,0 +1,67 @@
+#-----------------------------------------------#
+FROM CMD
+
+# navigate to the project folder
+cd C:/Users/ettor/OneDrive/Documenti/Coding/DE/
+
+# create the virtual enviroment
+#python -m venv de_venv ONLY FIRST TIME 
+
+# Activate the enviroment 
+.venv\Scripts\activate.bat
+
+#pip install pandas faker ONLY FIRST TIME
+#pip freeze > requirements.txt ONLY FIRST TIME
+#------------------------------------------------#
+
+FROM powershell VSC terminal
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass # Bypass script restriction temporarily
+.venv\Scripts\Activate.ps1 # activate venv
+
+#------------------------------------------------------------------------------------------------#
+
+FROM VSC 
+
+Ctrl + shift + p -> select interpreter -> .venv
+
+# First commit 
+
+```bash
+# If you haven't yet
+git init
+git add .
+git commit -m "Initial commit - ingest pipeline setup"
+
+# Link to GitHub repo
+#git remote add origin https://github.com/YOUR_USERNAME/ecommerce-data-pipeline.git # only first time
+
+# Push!
+git branch -M main
+git push -u origin main
+
+#------------------------------------------------------------------------------------------------#
+
+run the spark connect script:
+& C:/Users/ettor/OneDrive/Documenti/Coding/DE/.venv/Scripts/python.exe c:/Users/ettor/OneDrive/Documenti/Coding/DE/Spark_setup.py
+
+https://youtu.be/kUX6dCbdU3Q?feature=shared # to set up hadoop
+
+TO BE EXPECTED:
+
+PS C:\Users\ettor\OneDrive\Documenti\Coding\DE> echo $env:JAVA_HOME
+C:\Java\jdk
+PS C:\Users\ettor\OneDrive\Documenti\Coding\DE> echo $env:HADOOP_HOME
+C:\hadoop-3.4.1\bin
+
+{ Add to virtual env (from.venv)
+$env:JAVA_HOME = "C:\java"
+$env:PATH = "$env:JAVA_HOME\bin;" + $env:PATH
+
+set up hadoop for the current session:
+$env:HADOOP_HOME = "C:\Program Files\hadoop-2.7.1"
+$env:PATH = "$env:HADOOP_HOME\bin;" + $env:PATH } # Extreme 
+
+
+
+
