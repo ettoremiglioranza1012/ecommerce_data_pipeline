@@ -86,6 +86,7 @@ A few days later I tried initializing the project on Linux after dual booting wi
 - The setup process was significantly easier.
 - No issues with winutils.exe, environment variables, or compatibility between PySpark, Hadoop, and AWS SDK versions.
 - The whole installation and configuration, including Hadoop, Spark, and MinIO, was much quicker and more streamlined.
+
 It is highly recommended to run this project on a Unix-like system, such as Linux or macOS.
 
 > TLDR: Running Spark locally on Windows required non-trivial configuration, but it provided valuable insights into the full data engineering workflow — from local setup to cloud-ready infrastructure.
