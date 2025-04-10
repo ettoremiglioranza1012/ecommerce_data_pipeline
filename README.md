@@ -48,12 +48,7 @@ This project simulates a real-world data engineering pipeline using **Python**, 
     ```
     
 3. **Start MinIO locally using Docker**:
-    If you are on linux or MacOS you need to install docker
-    ```bash
-    sudo apt install docker.io
-    ```
-    
-    To simulate object storage, run
+    Install docker desktop then, to simulate object storage, run
     ```bash
     docker-compose up -d
     ```
@@ -87,14 +82,14 @@ Setting up PySpark in a local development environment on **Windows** presented s
 
 ➡️ See [docs/setup_notes.md](docs/setup_notes.md) for a detailed breakdown of the setup process on windows and how the issues were resolved.
 
-> TLDR: Running Spark locally on Windows required non-trivial configuration, but it provided valuable insights into the full data engineering workflow — from local setup to cloud-ready infrastructure.
-
 A few days later I tried initializing the project on Linux after dual booting with Linux/windows:
-
 - The setup process was significantly easier.
 - No issues with winutils.exe, environment variables, or compatibility between PySpark, Hadoop, and AWS SDK versions.
 - The whole installation and configuration, including Hadoop, Spark, and MinIO, was much quicker and more streamlined.
-
 It is highly recommended to run this project on a Unix-like system, such as Linux or macOS.
+
+> TLDR: Running Spark locally on Windows required non-trivial configuration, but it provided valuable insights into the full data engineering workflow — from local setup to cloud-ready infrastructure.
+
+
  
 

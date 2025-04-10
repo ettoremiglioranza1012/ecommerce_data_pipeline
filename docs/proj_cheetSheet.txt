@@ -1,23 +1,19 @@
 #-----------------------------------------------#
-FROM CMD
+### FROM terminal Ubunutu ###
 
-# navigate to the project folder
-cd C:/Users/ettor/OneDrive/Documenti/Coding/DE/
+cd path/to/project
 
-# create the virtual enviroment
-#python -m venv de_venv ONLY FIRST TIME 
+# Create 
 
-# Activate the enviroment 
-.venv\Scripts\activate.bat
+# Or activate
+python -m venv %venv_name%
+source venv/bin/activate
 
-#pip install pandas faker ONLY FIRST TIME
-#pip freeze > requirements.txt ONLY FIRST TIME
-#------------------------------------------------#
+(venv) > pip install -r requirements.txt
 
-FROM powershell VSC terminal
-
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass # Bypass script restriction temporarily
-.venv\Scripts\Activate.ps1 # activate venv
+# Update req:
+pip install %Library_Name%
+pip freeze > requirements.txt 
 
 #------------------------------------------------------------------------------------------------#
 
@@ -42,26 +38,47 @@ git push -u origin main
 
 #------------------------------------------------------------------------------------------------#
 
-run the spark connect script:
-& C:/Users/ettor/OneDrive/Documenti/Coding/DE/.venv/Scripts/python.exe c:/Users/ettor/OneDrive/Documenti/Coding/DE/Spark_setup.py
+RESURCES 
 
-https://youtu.be/kUX6dCbdU3Q?feature=shared # to set up hadoop
-
-TO BE EXPECTED:
-
-PS C:\Users\ettor\OneDrive\Documenti\Coding\DE> echo $env:JAVA_HOME
-C:\Java\jdk
-PS C:\Users\ettor\OneDrive\Documenti\Coding\DE> echo $env:HADOOP_HOME
-C:\hadoop-3.4.1\bin
-
-{ Add to virtual env (from.venv)
-$env:JAVA_HOME = "C:\java"
-$env:PATH = "$env:JAVA_HOME\bin;" + $env:PATH
-
-set up hadoop for the current session:
-$env:HADOOP_HOME = "C:\Program Files\hadoop-2.7.1"
-$env:PATH = "$env:HADOOP_HOME\bin;" + $env:PATH } # Extreme 
+https://youtu.be/kUX6dCbdU3Q?feature=shared # to set up hadoop on winzoz
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------------------------#
+
+### FROM CMD on Windows ###
+
+# navigate to the project folder
+cd C:/Users/ettor/OneDrive/Documenti/Coding/DE/
+
+# create the virtual enviroment
+#python -m venv de_venv ONLY FIRST TIME 
+
+# Activate the enviroment 
+.venv\Scripts\activate.bat
+
+pip install %Library_Name%
+pip freeze > requirements.txt 
+pip install -r requirements.txt
+
+### FROM powershell VSC terminal ###
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass # Bypass script restriction temporarily
+.venv\Scripts\Activate.ps1 # activate venv
 
