@@ -48,7 +48,7 @@ This project simulates a real-world data engineering pipeline using **Python**, 
     ```
     
 3. **Start MinIO locally using Docker**:
-    Install docker desktop then, to simulate object storage, run
+    Install docker desktop, then to simulate object storage, run
     ```bash
     docker-compose up -d
     ```
@@ -80,7 +80,7 @@ Setting up PySpark in a local development environment on **Windows** presented s
 - Manual configuration of environment variables (`JAVA_HOME`, `HADOOP_HOME`, etc.)
 - Ensuring connectivity and compatibility with local MinIO via the `s3a://` protocol
 
-➡️ See [docs/setup_notes.md](docs/setup_notes.md) for a detailed breakdown of the setup process on windows and how the issues were resolved.
+➡️ See [docs/Windows_setup_notes.md](docs/Windows_setup_notes.md) for a detailed breakdown of the setup process on windows and how the issues were resolved.
 
 A few days later I tried initializing the project on Linux after dual booting with Linux/windows:
 - The setup process was significantly easier.
