@@ -82,7 +82,7 @@ Setting up PySpark in a local development environment on **Windows** presented s
 
 ➡️ See [docs/Windows_setup_notes.md](docs/Windows_setup_notes.md) for a detailed breakdown of the setup process on windows and how the issues were resolved.
 
-A few days later I tried initializing the project on Linux after dual booting with Linux/windows:
+A few days later I tried initializing the project on Linux after dual booting with Linux/Windows:
 - The setup process was significantly easier.
 - No issues with winutils.exe, environment variables, or compatibility between PySpark, Hadoop, and AWS SDK versions.
 - The whole installation and configuration, including Hadoop, Spark, and MinIO, was much quicker and more streamlined.

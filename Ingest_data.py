@@ -54,8 +54,13 @@ if monday_flag or force_sync:
 # Get list of carts
 response = requests.get('https://fakestoreapi.com/carts')
 carts = response.json()
-carts_filename = f"carts_{timestamp}.json"
 
+# Overwrite the 'date' field of each cart to simulate daily ingestion
+for cart in carts:
+    cart["date"] = timestamp  # e.g., '2025-04-10'
+
+# Save carts to file
+carts_filename = f"carts_{timestamp}.json"
 with open("data/raw/" + carts_filename, "w") as f:
     json.dump(carts, f, indent=2)
 
