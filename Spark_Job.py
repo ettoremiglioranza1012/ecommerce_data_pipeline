@@ -1,6 +1,9 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from datetime import datetime
+import os
+import shutil
+
 
 # Utility Functions
 def trigger_cache(df):
@@ -96,7 +99,7 @@ carts_df_flat = carts_df_exploded.select(
     "__V",
     "date",
     "id",
-    col("product.productID").alias("productID"),
+    col("product.productID").alias("product_ID"),
     col("product.quantity").alias("quantity")
 )
 
@@ -195,3 +198,52 @@ top_prod_rev = enriched_df.groupBy("product_ID", "category").agg(
 ord_bycity = enriched_df.groupBy("city").agg(
     sum(col("quantity")).alias("Orders_by_city")
 ).orderBy(col("Orders_by_city").desc())
+
+# Create daily partition
+daily_folder = f"data/analytics/analytics_{timestamp}"
+
+# Save dataframe into parquet files
+files = [
+    {"name": "revenue_by_category", "df": revenue_by_category},
+    {"name": "revenue_by_users_ID", "df": revenue_by_users_ID},
+    {"name": "total_day_revenue", "df": total_day_revenue},
+    {"name": "total_quantity_per_prod", "df": total_quantity_per_prod},
+    {"name": "avg_ordval_per_user", "df": avg_ordval_per_user},
+    {"name": "avg_rat_per_cat", "df": avg_rat_per_cat},
+    {"name": "total_revenue_per_city", "df": total_revenue_per_city},
+    {"name": "num_of_prod_sold", "df": num_of_prod_sold},
+    {"name": "rev_prod_cat", "df": rev_prod_cat},
+    {"name": "top_user_rev", "df": top_user_rev},
+    {"name": "top_prod_rev", "df": top_prod_rev},
+    {"name": "ord_bycity", "df": ord_bycity}
+]
+
+# Save files in parquet efficient format and processing it to be warehouse_ready
+for file in files:
+    file["df"].coalesce(1).write.mode("overwrite") \
+        .parquet(f"data/analytics/analytics_{timestamp}/{file["name"]}")
+
+# Build path
+base_path = f"/home/ettore1012/Project/ecommerce_data_pipeline-main/data/analytics/analytics_{timestamp}"
+output_path = f"/home/ettore1012/Project/ecommerce_data_pipeline-main/data/warehouse_ready/partition_{timestamp}"
+
+# Create new dir for warehouse_ready parquets
+os.makedirs(output_path, exist_ok=True)
+
+# Extracte and move data from spark_job to warehouse_ready structure
+for dir in os.listdir(base_path):
+    path_to_dir = os.path.join(base_path, dir)
+    flag_parq = False
+    for file in os.listdir(path_to_dir):
+        path_to_file = os.path.join(path_to_dir, file)
+        if path_to_file.endswith(".parquet"):
+            flag_parq = True
+            shutil.move(path_to_file, output_path)
+            new_file_location = os.path.join(output_path, file)
+            new_name = os.path.join(output_path, f"{dir}.parquet")
+            os.rename(new_file_location, new_name)
+    if not flag_parq:
+        print(f"⚠️ Nessun file .parquet trovato in {path_to_dir}")
+
+# Remove data from local
+shutil.rmtree(base_path)

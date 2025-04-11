@@ -13,14 +13,16 @@ parser.add_argument("--force_sync", action = "store_true", help="Force product/u
 args = parser.parse_args()
 
 # Use the flag
-force_sync = args.force_sync
+force_sync_final = args.force_sync
+force_sync_temp = True
+
 
 # Save time_stamp for today
 today = datetime.now()
 timestamp = today.strftime("%Y-%m-%d")
 monday_flag = today.weekday() == 0
 
-if monday_flag or force_sync:
+if monday_flag or force_sync_temp:
     # Access the if only if it is the first day of the week
     # Fetch users and products 
 
