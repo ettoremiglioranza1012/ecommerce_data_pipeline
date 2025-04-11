@@ -21,11 +21,11 @@ This project simulates a real-world data engineering pipeline using **Python**, 
   - Parses, flattens, and **enriches cart data** by joining with user and product attributes
   - Caches intermediate result for fast re-use
   - Computes 12+ analytics metrics including:
-  - Total revenues per category, city, user
-  - Top-selling products
-  - Weighted average ratings
-  - Average order value per user
-  - Quantity sold per product
+    - Total revenues per category, city, user
+    - Top-selling products
+    - Weighted average ratings
+    - Average order value per user
+    - Quantity sold per product
   - Writes metrics in `Parquet` format with partitioning by date
 
 - 🧼 **Post-Processing Layer: Warehouse Ready**
