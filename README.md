@@ -1,6 +1,6 @@
 # 🛒 E-Commerce Data Pipeline (Local → Cloud Ready)
 
-This project simulates a real-world data engineering pipeline using **Python**, **MinIO**, and **PySpark**. It includes:
+This project simulates a real-world data engineering pipeline using **Python**, **PySpark**, and other state-of-the-art tools. It includes:
 
 - 📦 **Data ingestion** from the Fake Store API:
   - Products and Users are fetched weekly (every Monday or with `--force_sync`)
