@@ -1,5 +1,6 @@
 import os
 import boto3
+import shutil
 import duckdb
 from datetime import datetime
 from botocore.client import Config
@@ -51,9 +52,10 @@ for obj_dict in response['Contents']:
     """)
 
     # Load data into table, use CTE to avoid duplicates when re-running.
-    # This is useful if in the Daily DAG something goes wrong and we need
-    # to re-run the scripts. Maybe for a project like this it is an overkill,
+    # This is useful if in the Daily DAG data flow something goes wrong and we need
+    # to re-run the scripts. Maybe for a project like this it's an overkill,
     # but since this is done to learn stuff I think it is a valuable thing to add.
+    # This best practice is called Idempotency.
     """
         1. 'WITH new_rows AS...' is a Common Table Expression;
             Used to generate the table with the newly added data;
@@ -112,4 +114,5 @@ for obj_dict in response['Contents']:
             ON existing.date_id = new_rows.date_id
         WHERE existing.date_id IS NULL 
     """)
-
+# Clean local from data
+shutil.rmtree(f"data/to_duckdb/partition_{timestamp}")
